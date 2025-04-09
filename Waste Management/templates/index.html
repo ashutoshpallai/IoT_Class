@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Waste Management Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            padding: 40px 20px;
+            min-height: 100vh;
+            color: #ffffff;
+            animation: backgroundFade 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundFade {
+            0% { background: linear-gradient(to right, #6dd5ed, #2193b0); }
+            100% { background: linear-gradient(to right, #56ab2f, #a8e063); }
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card::before {
+            content: '🗑️';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            opacity: 0.1;
+            animation: floatBin 4s ease-in-out infinite;
+        }
+
+        @keyframes floatBin {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+
+        .fill {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <h1> Smart Waste Management Dashboard</h1>
+    <div class="dashboard">
+        {% for bin in bins %}
+        <div class="card">
+            <p><strong>Bin ID:</strong> {{ bin[0] }}</p>
+            <p><strong>Location:</strong> {{ bin[1] }}</p>
+            <p class="fill"><strong>Fill Level:</strong> {{ bin[2] }}%</p>
+            <p><strong>Last Updated:</strong> {{ bin[3] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <footer>© 2025 SmartWaste Systems. All rights reserved.</footer>
+</body>
+</html>
